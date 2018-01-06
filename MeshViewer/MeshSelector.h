@@ -9,11 +9,9 @@
 */  
 #pragma once
 #include "Common.h"
-//#include "MeshViewer.h"
 #include "ANN\ANN.h"
 #include <QtOpenGL/QGLWidget>
-#include <gl/GL.h>
-#include <gl/GLU.h>
+
 
 class MeshViewer;
 
@@ -47,7 +45,7 @@ public:
 	void pickFace(const MyMesh::Point &p);
 
 	
-	int findVertByPoint(const MyMesh::Point &p);
+	int findVertByPoint(const MyMesh::Point &p);   // find a vertex on mesh from a given 3d point
 	int findEdgeByPoint(const MyMesh::Point &p);
 	int findFaceByPoint(const MyMesh::Point &p);
 
@@ -65,6 +63,7 @@ public:
 
 	void buildSearchTree();
 	int  findClosestVertFromPoint(const MyMesh::Point &p, double &dist);
+
 private:
 	ANNkd_tree     *kdTree;
 	MyMesh         *ptr_mesh_;
@@ -79,10 +78,11 @@ private:
 	bool			is_tag_selected_edge_ = false;
 	bool			is_tag_selected_face_ = false;
 
-	float			point_dist_thres_ = 10;
+	float			point_dist_thres_ = 50;
+
+	float			edge_width_    = 4.0f;
+	int				vert_size_     = 12;
 	int				tag_font_size_ = 10;
-	int				vert_size_  = 12;
-	float			edge_width_ = 4.0f;
 	OpenMesh::Vec3f vert_color_ = OpenMesh::Vec3f(1.0, 0.5, 0.0);
 	OpenMesh::Vec3f edge_color_ = OpenMesh::Vec3f(1.0, 0.5, 1.0);
 	OpenMesh::Vec3f face_color_ = OpenMesh::Vec3f(1.0, 0.5, 0.5);

@@ -211,6 +211,15 @@
    <addaction name="actionPickFace"/>
   </widget>
   <widget class="QDockWidget" name="dockWidgetCommand">
+   <property name="minimumSize">
+    <size>
+     <width>80</width>
+     <height>38</height>
+    </size>
+   </property>
+   <property name="floating">
+    <bool>false</bool>
+   </property>
    <property name="windowTitle">
     <string>Command</string>
    </property>
@@ -221,7 +230,7 @@
     <widget class="QPushButton" name="pushButton">
      <property name="geometry">
       <rect>
-       <x>30</x>
+       <x>0</x>
        <y>20</y>
        <width>75</width>
        <height>23</height>
@@ -747,6 +756,10 @@
    </property>
   </action>
   <action name="actionResetArcBall">
+   <property name="icon">
+    <iconset resource="mainwindow.qrc">
+     <normaloff>:/images/Resources/images/Reset.png</normaloff>:/images/Resources/images/Reset.png</iconset>
+   </property>
    <property name="text">
     <string>Reset ArcBall</string>
    </property>

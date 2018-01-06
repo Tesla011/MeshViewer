@@ -95,25 +95,34 @@ typedef Eigen::Triplet<double> T;
 #define logI /\
 /logI
 #endif
-
 #define logW (printf("--warn-- in [%d@%s] ",__LINE__, __FUNCTION__), printf)  
 #define logE (printf("--error- in [%d@%s] ",__LINE__, __FUNCTION__), printf)  
 
 
-
-
-
-
-inline double triangleArea(const Eigen::Vector3d &p1, const Eigen::Vector3d &p2, const Eigen::Vector3d &p3)
+template<class object>
+void SafeDelete(object *ptr)
 {
-	Eigen::Vector3d p1p2 = p2 - p1;
-	Eigen::Vector3d p1p3 = p3 - p1;
-	return 0.5 *(p1p2.cross(p1p3).norm());
+	if (ptr != NULL)
+	{
+		delete ptr;
+		ptr = NULL;
+	}
+}
+
+template<class object>
+void SafeDeletes(object *ptr)
+{
+	if (ptr != NULL)
+	{
+		delete[] ptr;
+		ptr = NULL;
+	}
 }
 
 
 void save2DTexMesh(const MyMesh *mesh, string file);
 
+void meshReader(std::string meshFile);
 
 template< typename MeshT >
 MeshT* meshDeepCopy(const MeshT* mesh)
@@ -139,8 +148,6 @@ MeshT* meshDeepCopy(const MeshT* mesh)
 	}
 	return mesh_copy;
 }
-
-void meshReader(std::string meshFile);
 
 template< typename MeshT >
 void meshWriter(const MeshT* mesh, string file, double scale)
@@ -186,5 +193,14 @@ bool ray_triangle_intersection(
 	OpenMesh::Vec3d &baryC, double &t);
 
 bool isPointOnTriangle(const std::vector<OpenMesh::Vec3d>& tri, const OpenMesh::Vec3d& p);
+
+/// ******************** Functions with Eigen ************************
+
+inline double triangleArea(const Eigen::Vector3d &p1, const Eigen::Vector3d &p2, const Eigen::Vector3d &p3)
+{
+	Eigen::Vector3d p1p2 = p2 - p1;
+	Eigen::Vector3d p1p3 = p3 - p1;
+	return 0.5 *(p1p2.cross(p1p3).norm());
+}
 
 #endif // COMMON_H

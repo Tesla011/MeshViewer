@@ -20,7 +20,6 @@
 
 #include "mainwindow.h"
 #include "ArcBall.h"
-#include "globalFunctions.h"
 #include "ui_SaveSelection.h"
 
 #define SWAP(a,b,T) {T tmp=(a); (a)=(b); (b)=tmp;}
@@ -37,9 +36,6 @@ MeshViewer::MeshViewer(QWidget *parent, MainWindow* mainwindow)
 	ptr_selector_   = new MeshSelector;
 	bbox_min_		= OpenMesh::Vec3d(-1.0, -1.0, -1.0);
 	bbox_max_		= OpenMesh::Vec3d(1.0, 1.0, 1.0);
-
-
-	
 
 	mesh_select_mode_	= SELECT_NONE;
 	mouse_mode_			= MOUSE_NAVIGATE_MESH;
@@ -387,7 +383,6 @@ void MeshViewer::setDefaultMaterial()
 	glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, shine);
 	//glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emission);
 }
-
 void MeshViewer::setDefaultViewAngle()
 {
 	eye_distance_ = 5.0;
@@ -398,7 +393,6 @@ void MeshViewer::setDefaultViewAngle()
 	eye_direction_[1] = 0.0;
 	eye_direction_[2] = 1.0;
 }
-
 void MeshViewer::setBackground()
 {
 	QColor color = QColorDialog::getColor(Qt::white, this, tr("background color"));
@@ -458,7 +452,6 @@ void MeshViewer::setDrawMeshTexture(bool bv)
 	is_draw_texture_ = bv;
 	updateGL();
 }
-
 void MeshViewer::setDrawAxes()
 {
 	is_draw_axes_ = !is_draw_axes_;
@@ -475,63 +468,6 @@ void MeshViewer::setDrawBoundary()
 	updateGL();
 }
 
-
-void MeshViewer::showMeshInfo()
-{
-
-	QImage *image = new QImage();
-	vector<string> name;
-	//name.push_back("meshPointSet.png");
-	//name.push_back("meshWirFramee.png");
-	//name.push_back("meshHiddenLines.png");
-	//name.push_back("meshFlatLines.png");
-	//name.push_back("meshSolidFlat.png");
-	//name.push_back("meshSolidSmooth.png");
-	//name.push_back("axis.png");
-	//name.push_back("info.png");
-	//name.push_back("meshBBox.png");
-	//name.push_back("meshBoundary.png");
-	//name.push_back("texture.png");
-	//name.push_back("search.png");
-	//name.push_back("cursor.png");
-	//name.push_back("open.png");
-	//name.push_back("save.png");
-	//name.push_back("saveScreen.png");
-
-	//name.push_back("clearSelectedEdges.png");
-	//name.push_back("clearSelectedFaces.png");
-	//name.push_back("clearSelectedVertices.png");
-	//name.push_back("saveSelectedEdges.png");
-	//name.push_back("saveSelectedFaces.png");
-	//name.push_back("saveSelectedVertices.png");
-	//name.push_back("saveSelection.png");
-	//name.push_back("clearSelection.png");
-
-	//for (int i = 0; i < name.size(); i++)
-	//{
-	//	image->load(QString::fromStdString("D:/myCloudDisk/OneDrive/MeshViewer/MeshViewer/Resources/images/" + name[i]));
-	//	image->save(QString::fromStdString("D:/myCloudDisk/OneDrive/MeshViewer/MeshViewer/Resources/" + name[i]));
-	//}
-
-
-
-	QString info;
-	if (is_load_mesh_)
-	{
-		info = QString(
-			"Vertices  %1 \n"
-			"Edges     %2 \n"
-			"Faces     %3 \n"
-			"Path      %4"
-		).arg(ptr_mesh_->n_vertices()).arg(ptr_mesh_->n_edges()).arg(ptr_mesh_->n_faces())
-			.arg(mesh_path_);
-	}
-	else
-		info = QString("No mesh loaded yet");
-	
-
-	QMessageBox::information(this, tr("MeshInfo"), info);
-}
 
 void MeshViewer::setNoneSelectMode()
 {
@@ -911,7 +847,6 @@ void MeshViewer::drawMesh(int drawmode)
 		glDisable(GL_LIGHTING);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		drawMeshWireFrame();
-		//draw_meshpointset();
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		break;
 	case MESH_HIDDEN_LINES:
@@ -922,7 +857,6 @@ void MeshViewer::drawMesh(int drawmode)
 		glEnable(GL_LIGHTING);
 		glShadeModel(GL_FLAT);
 		drawMeshSolidFlat();
-		//draw_meshpointset();
 		glDisable(GL_LIGHTING);
 		break;
 	case MESH_FLAT_LINES:
@@ -932,18 +866,15 @@ void MeshViewer::drawMesh(int drawmode)
 		glShadeModel(GL_FLAT);
 		drawMeshSolidFlat();
 		glDisable(GL_POLYGON_OFFSET_FILL);
-		//draw_meshpointset();
 		glDisable(GL_LIGHTING);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		drawMeshWireFrame();
-		//draw_meshpointset();
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		break;
 	case MESH_SOLID_SMOOTH:
 		glEnable(GL_LIGHTING);
 		glShadeModel(GL_SMOOTH);
 		drawMeshSolidSmooth();
-		//draw_meshpointset();
 		glDisable(GL_LIGHTING);
 		break;
 	default:
@@ -1392,14 +1323,68 @@ void MeshViewer::saveScreen()
 	logE("save screen to '%s'\n", filename.toStdString());
 }
 
+void MeshViewer::showMeshInfo()
+{
 
+	QImage *image = new QImage();
+	vector<string> name;
+	//name.push_back("meshPointSet.png");
+	//name.push_back("meshWirFramee.png");
+	//name.push_back("meshHiddenLines.png");
+	//name.push_back("meshFlatLines.png");
+	//name.push_back("meshSolidFlat.png");
+	//name.push_back("meshSolidSmooth.png");
+	//name.push_back("axis.png");
+	//name.push_back("info.png");
+	//name.push_back("meshBBox.png");
+	//name.push_back("meshBoundary.png");
+	//name.push_back("texture.png");
+	//name.push_back("search.png");
+	//name.push_back("cursor.png");
+	//name.push_back("open.png");
+	//name.push_back("save.png");
+	//name.push_back("saveScreen.png");
+
+	//name.push_back("clearSelectedEdges.png");
+	//name.push_back("clearSelectedFaces.png");
+	//name.push_back("clearSelectedVertices.png");
+	//name.push_back("saveSelectedEdges.png");
+	//name.push_back("saveSelectedFaces.png");
+	//name.push_back("saveSelectedVertices.png");
+	//name.push_back("saveSelection.png");
+	//name.push_back("clearSelection.png");
+
+	//for (int i = 0; i < name.size(); i++)
+	//{
+	//	image->load(QString::fromStdString("D:/myCloudDisk/OneDrive/MeshViewer/MeshViewer/Resources/images/" + name[i]));
+	//	image->save(QString::fromStdString("D:/myCloudDisk/OneDrive/MeshViewer/MeshViewer/Resources/" + name[i]));
+	//}
+
+
+
+	QString info;
+	if (is_load_mesh_)
+	{
+		info = QString(
+			"Vertices  %1 \n"
+			"Edges     %2 \n"
+			"Faces     %3 \n"
+			"Path      %4"
+		).arg(ptr_mesh_->n_vertices()).arg(ptr_mesh_->n_edges()).arg(ptr_mesh_->n_faces())
+			.arg(mesh_path_);
+	}
+	else
+		info = QString("No mesh loaded yet");
+
+
+	QMessageBox::information(this, tr("MeshInfo"), info);
+}
 void MeshViewer::resetArcBall()
 {
 	ptr_arcball_->InitBall();
 	setDefaultViewAngle();
 	updateGL();
 }
-
 void MeshViewer::about()
 {
 	QString info = 

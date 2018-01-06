@@ -93,9 +93,6 @@
     <ClInclude Include="ArcBall.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="globalFunctions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MeshSelector.h">
       <Filter>Header Files</Filter>
     </ClInclude>

@@ -90,13 +90,15 @@ signals:
 	void setDrawTextureMode(bool bv);
 
 public slots:
-	void setBackground();
+	
 	void loadMesh();
 	void loadTexture();
 	void saveMesh();
 	void saveScreen();
 	
+	void setBackground();
 	void resetArcBall();
+	void showMeshInfo();
 	void about();
 
 	void setMeshInvisible();
@@ -110,9 +112,6 @@ public slots:
 	void setDrawAxes();
 	void setDrawBBox();
 	void setDrawBoundary();
-
-
-	void showMeshInfo();
 
 	void setNoneSelectMode();
 	void setVertSelectMode();
@@ -139,7 +138,6 @@ public slots:
 	void saveSelectedFace();
 
 private:
-
 	void render();
 	void setDefaultLight();
 	void setDefaultMaterial();

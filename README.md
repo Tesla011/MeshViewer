@@ -29,7 +29,10 @@ Requirements:
 	- ~~fix the bug when picking vertex after rotaing the mesh~~
 - 2017-12-05
 	- fix the crashing bug of kdTree initialization in MeshSelection after opening a second mesh
-
+- 2017-12-19
+	- ~~fix the bug of resetArcball, add setDefaultViewAngle function~~
+	
+	
 ## Contact
 
 If you have any questions, please email Wei Li at wei587me@163.com

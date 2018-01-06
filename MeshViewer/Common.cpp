@@ -119,7 +119,6 @@ OpenMesh::Vec3d nearestPtOnSegment(const OpenMesh::Vec3d &p, const OpenMesh::Vec
 	return (p - p0).sqrnorm() < (p1 - p).sqrnorm() ? p0 : p1;
 }
 
-
 bool ray_triangle_intersection(
 	const OpenMesh::Vec3d & src, const OpenMesh::Vec3d & dir,
 	const OpenMesh::Vec3d & triP0, const OpenMesh::Vec3d & triP1, const OpenMesh::Vec3d & triP2,
@@ -128,7 +127,7 @@ bool ray_triangle_intersection(
 	double area = ((triP1 - triP0) % (triP2 - triP0)).norm();
 	if (abs(area) < IS_ZERO)
 	{
-		cout << "error in CMeshProjection::ray_triangle_intersection [degenerate triangle]" << endl;
+		logE("degenerate triangle\n");
 		return false;
 	}
 
@@ -136,7 +135,7 @@ bool ray_triangle_intersection(
 	triN.normalize();
 	if (abs(triN | dir) < IS_ZERO)
 	{
-		cout << "warning in CMeshProjection::ray_triangle_intersection [ray is parallel to triangle]" << endl;
+		logW("ray is parallel to triangle\n");
 		return false;
 	}
 
